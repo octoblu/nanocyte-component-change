@@ -2,6 +2,9 @@ ReturnValue = require 'nanocyte-component-return-value'
 
 class Change extends ReturnValue
   onEnvelope: (envelope) =>
-    return envelope.message
+    {data,message} = envelope
+
+    return if data == message
+    return message
 
 module.exports = Change

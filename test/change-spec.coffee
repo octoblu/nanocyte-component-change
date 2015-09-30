@@ -11,4 +11,15 @@ describe 'Change', ->
   describe '->onEnvelope', ->
     describe 'when called with an envelope', ->
       it 'should return the message', ->
-        expect(@sut.onEnvelope({message: 'anything'})).to.deep.equal 'anything'
+        envelope =
+          message: 'anything'
+
+        expect(@sut.onEnvelope envelope).to.deep.equal 'anything'
+
+    describe 'when called with an envelope with same data and message', ->
+      it 'should return nothing', ->
+        envelope =
+          message: 'anything'
+          data:    'anything'
+
+        expect(@sut.onEnvelope envelope).not.to.exist
