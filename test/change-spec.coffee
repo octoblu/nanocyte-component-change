@@ -23,3 +23,11 @@ describe 'Change', ->
           data:    'anything'
 
         expect(@sut.onEnvelope envelope).not.to.exist
+
+    describe 'when called with an envelope containing deeply equal data and message', ->
+      it 'should return nothing', ->
+        envelope =
+          message: {something: 'with-booze'}
+          data:    {something: 'with-booze'}
+
+        expect(@sut.onEnvelope envelope).not.to.exist
