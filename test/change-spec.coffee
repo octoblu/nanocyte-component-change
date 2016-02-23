@@ -13,6 +13,8 @@ describe 'Change', ->
       it 'should return the message', ->
         envelope =
           message: 'anything'
+          config: key: 0
+          data: {}
 
         expect(@sut.onEnvelope envelope).to.deep.equal 'anything'
 
@@ -20,6 +22,7 @@ describe 'Change', ->
       it 'should return nothing', ->
         envelope =
           message: 'anything'
+          config: key: 0
           data:    'anything'
 
         expect(@sut.onEnvelope envelope).not.to.exist
@@ -27,7 +30,12 @@ describe 'Change', ->
     describe 'when called with an envelope containing deeply equal data and message', ->
       it 'should return nothing', ->
         envelope =
-          message: {something: 'with-booze'}
-          data:    {something: 'with-booze'}
+          message:
+            root:
+              something: 'with-booze'
+          config: key: 'root'
+          data:
+            root:
+              something: 'with-booze'
 
         expect(@sut.onEnvelope envelope).not.to.exist
