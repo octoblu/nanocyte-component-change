@@ -33,9 +33,22 @@ describe 'Change', ->
           message:
             root:
               something: 'with-booze'
-          config: key: 'root'
+          config: key: 'root.something'
           data:
             root:
               something: 'with-booze'
 
         expect(@sut.onEnvelope envelope).not.to.exist
+
+    describe 'when called with an envelope containing not deeply equal data and message', ->
+      it 'should return the message', ->
+        envelope =
+          message:
+            root:
+              something: 'with-booze'
+          config: key: 'root.something'
+          data:
+            root:
+              something: 'without-booze'
+
+        expect(@sut.onEnvelope envelope).to.deep.equal root: something: 'with-booze'

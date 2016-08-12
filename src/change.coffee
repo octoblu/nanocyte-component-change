@@ -5,7 +5,10 @@ class Change extends ReturnValue
   onEnvelope: (envelope) =>
     {data,message,config} = envelope
 
-    return if _.isEqual data[config.key], message[config.key]
+    dataCheck = _.get data, config.key
+    messageCheck = _.get message, config.key
+
+    return if _.isEqual dataCheck, messageCheck
     return message
 
 module.exports = Change
